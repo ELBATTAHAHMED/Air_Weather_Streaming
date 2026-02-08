@@ -1,0 +1,12 @@
+allow_csv_upload: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_run_async: false
+cache_timeout: null
+database_name: trino_air_quality_lakehouse
+expose_in_sqllab: true
+extra: {}
+sqlalchemy_uri: trino://trino@trino:8080/hive/lakehouse
+uuid: 11111111-1111-4111-8111-111111111111
+version: 1.0.0

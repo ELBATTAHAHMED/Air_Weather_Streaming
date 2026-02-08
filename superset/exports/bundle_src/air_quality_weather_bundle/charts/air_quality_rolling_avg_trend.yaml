@@ -1,0 +1,23 @@
+slice_name: Air Quality Rolling Average Trend
+viz_type: table
+params:
+  datasource: 1__table
+  viz_type: table
+  granularity_sqla: window_start
+  groupby:
+    - city
+    - parameter
+  metrics:
+    - aggregate: AVG
+      column:
+        column_name: rolling_avg
+      expressionType: SIMPLE
+      label: AVG(rolling_avg)
+  adhoc_filters: []
+  time_range: No filter
+  row_limit: 5000
+query_context: null
+cache_timeout: null
+uuid: 33333333-3333-4333-8333-333333333333
+version: 1.0.0
+dataset_uuid: 22222222-2222-4222-8222-222222222222

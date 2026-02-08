@@ -1,0 +1,50 @@
+dashboard_title: M2 - Air & Weather Decision Dashboard
+description: Historical BI dashboard for air quality and weather trends.
+css: ""
+slug: m2-air-weather-decision-dashboard
+uuid: 44444444-4444-4444-8444-444444444444
+position:
+  DASHBOARD_VERSION_KEY: v2
+  ROOT_ID:
+    id: ROOT_ID
+    type: ROOT
+    children:
+      - GRID_ID
+  GRID_ID:
+    id: GRID_ID
+    type: GRID
+    parents:
+      - ROOT_ID
+    children:
+      - ROW-air-quality
+  ROW-air-quality:
+    id: ROW-air-quality
+    type: ROW
+    parents:
+      - ROOT_ID
+      - GRID_ID
+    children:
+      - CHART-air-quality-trend
+    meta:
+      background: BACKGROUND_TRANSPARENT
+  CHART-air-quality-trend:
+    id: CHART-air-quality-trend
+    type: CHART
+    parents:
+      - ROOT_ID
+      - GRID_ID
+      - ROW-air-quality
+    children: []
+    meta:
+      chartId: 1
+      height: 50
+      width: 12
+      sliceName: Air Quality Rolling Average Trend
+      uuid: 33333333-3333-4333-8333-333333333333
+metadata:
+  timed_refresh_immune_slices: []
+  expanded_slices: {}
+  refresh_frequency: 0
+  default_filters: "{}"
+  color_scheme: null
+version: 1.0.0
