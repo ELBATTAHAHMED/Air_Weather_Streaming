@@ -249,27 +249,9 @@ def main() -> None:
         from_json(col("raw_value"), weather_schema, json_options),
     )
 
-    df_rejects_base = (
-        df_parsed.select(
-            col("raw_value"),
-            col("data._corrupt_record").alias("corrupt_record"),
-            col("data.event_time").alias("event_time_raw"),
-            col("data.city").alias("city_raw"),
-        )
-        .withColumn(
-            "reject_reason",
-            when(col("corrupt_record").isNotNull(), lit("corrupt_json"))
-            .when(col("event_time_raw").isNull(), lit("missing_event_time"))
-            .when(col("city_raw").isNull(), lit("missing_city")),
-        )
-        .filter(col("reject_reason").isNotNull())
-        .withColumn("rejected_at", current_timestamp())
-        .withColumn("reject_date", to_date(col("rejected_at")))
-    )
-
-    df_clean = (
+    df_expanded = (
         df_parsed.select(col("raw_value"), col("data.*"))
-        .filter(col("_corrupt_record").isNull())
+        .withColumn("corrupt_record", col("_corrupt_record"))
         .drop("_corrupt_record")
         .withColumnRenamed("event_time", "event_time_raw")
         .withColumn("event_time", parse_event_time(col("event_time_raw")))
@@ -281,7 +263,7 @@ def main() -> None:
     humidity_unit = lower(trim(col("humidity_unit")))
 
     df_normalized = (
-        df_clean.withColumn(
+        df_expanded.withColumn(
             "temperature_c",
             when(temp_unit.isin("f", "°f", "fahrenheit"), (col("temperature") - 32) * 5 / 9)
             .when(temp_unit.isin("c", "°c", "celsius") | temp_unit.isNull(), col("temperature"))
@@ -308,23 +290,32 @@ def main() -> None:
         & (col("wind_speed_ms") >= 0)
     )
 
-    # 1) Remove unusable records required for downstream validation.
-    df_valid = df_normalized.filter(col("event_time").isNotNull()).filter(col("city").isNotNull())
-
-    df_rejects_invalid_range = (
-        df_valid.filter(~valid_ranges)
+    df_rejects = (
+        df_normalized.withColumn(
+            "reject_reason",
+            when(col("corrupt_record").isNotNull(), lit("corrupt_json"))
+            .when(col("event_time").isNull(), lit("missing_event_time"))
+            .when(col("city").isNull(), lit("missing_city"))
+            .when(~valid_ranges, lit("invalid_range")),
+        )
+        .filter(col("reject_reason").isNotNull())
         .select(
             col("raw_value"),
-            lit(None).cast("string").alias("corrupt_record"),
+            col("corrupt_record"),
             col("event_time_raw"),
             col("city").alias("city_raw"),
+            col("reject_reason"),
+            current_timestamp().alias("rejected_at"),
         )
-        .withColumn("reject_reason", lit("invalid_range"))
-        .withColumn("rejected_at", current_timestamp())
         .withColumn("reject_date", to_date(col("rejected_at")))
     )
 
-    df_rejects = df_rejects_base.unionByName(df_rejects_invalid_range)
+    # 1) Remove unusable records required for downstream validation.
+    df_valid = (
+        df_normalized.filter(col("corrupt_record").isNull())
+        .filter(col("event_time").isNotNull())
+        .filter(col("city").isNotNull())
+    )
 
     rejects_query = (
         df_rejects.writeStream.outputMode("append")
@@ -336,7 +327,7 @@ def main() -> None:
         .start()
     )
 
-    df_valid_for_processing = df_valid.drop("raw_value", "event_time_raw")
+    df_valid_for_processing = df_valid.drop("raw_value", "event_time_raw", "corrupt_record")
 
     # 2) Apply watermark once, then deduplicate using message_id when available.
     dedup_key = when(

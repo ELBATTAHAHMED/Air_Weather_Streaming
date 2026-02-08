@@ -298,29 +298,9 @@ def main() -> None:
         from_json(col("raw_value"), air_quality_schema, json_options),
     )
 
-    df_rejects_base = (
-        df_parsed.select(
-            col("raw_value"),
-            col("data._corrupt_record").alias("corrupt_record"),
-            col("data.event_time").alias("event_time_raw"),
-            col("data.value").alias("value_raw"),
-            col("data.city").alias("city_raw"),
-        )
-        .withColumn(
-            "reject_reason",
-            when(col("corrupt_record").isNotNull(), lit("corrupt_json"))
-            .when(col("event_time_raw").isNull(), lit("missing_event_time"))
-            .when(col("value_raw").isNull(), lit("missing_value"))
-            .when(col("city_raw").isNull(), lit("missing_city")),
-        )
-        .filter(col("reject_reason").isNotNull())
-        .withColumn("rejected_at", current_timestamp())
-        .withColumn("reject_date", to_date(col("rejected_at")))
-    )
-
-    df_clean = (
+    df_expanded = (
         df_parsed.select(col("raw_value"), col("data.*"))
-        .filter(col("_corrupt_record").isNull())
+        .withColumn("corrupt_record", col("_corrupt_record"))
         .drop("_corrupt_record")
         .withColumnRenamed("event_time", "event_time_raw")
         .withColumn("event_time", parse_event_time(col("event_time_raw")))
@@ -339,29 +319,35 @@ def main() -> None:
         | ((col("parameter") == "o3") & col("value").between(0, 1000))
     )
 
-    # 1) Remove unusable records required for downstream validation.
-    df_valid = (
-        df_clean.filter(col("event_time").isNotNull())
-        .filter(col("value").isNotNull())
-        .filter(col("city").isNotNull())
-    )
-
-    df_rejects_invalid_range = (
-        df_valid.filter(pollutant_filter)
-        .filter(~valid_ranges)
+    df_rejects = (
+        df_expanded.withColumn(
+            "reject_reason",
+            when(col("corrupt_record").isNotNull(), lit("corrupt_json"))
+            .when(col("event_time").isNull(), lit("missing_event_time"))
+            .when(col("value").isNull(), lit("missing_value"))
+            .when(col("city").isNull(), lit("missing_city"))
+            .when(pollutant_filter & (~valid_ranges), lit("invalid_range")),
+        )
+        .filter(col("reject_reason").isNotNull())
         .select(
             col("raw_value"),
-            lit(None).cast("string").alias("corrupt_record"),
+            col("corrupt_record"),
             col("event_time_raw"),
             col("value").cast("double").alias("value_raw"),
             col("city").alias("city_raw"),
+            col("reject_reason"),
+            current_timestamp().alias("rejected_at"),
         )
-        .withColumn("reject_reason", lit("invalid_range"))
-        .withColumn("rejected_at", current_timestamp())
         .withColumn("reject_date", to_date(col("rejected_at")))
     )
 
-    df_rejects = df_rejects_base.unionByName(df_rejects_invalid_range)
+    # 1) Remove unusable records required for downstream validation.
+    df_valid = (
+        df_expanded.filter(col("corrupt_record").isNull())
+        .filter(col("event_time").isNotNull())
+        .filter(col("value").isNotNull())
+        .filter(col("city").isNotNull())
+    )
 
     rejects_query = (
         df_rejects.writeStream.outputMode("append")
@@ -373,7 +359,7 @@ def main() -> None:
         .start()
     )
 
-    df_valid_for_processing = df_valid.drop("raw_value", "event_time_raw")
+    df_valid_for_processing = df_valid.drop("raw_value", "event_time_raw", "corrupt_record")
 
     # Silver uses a stateless stream branch to improve checkpoint stability on local FS.
     df_silver = (
