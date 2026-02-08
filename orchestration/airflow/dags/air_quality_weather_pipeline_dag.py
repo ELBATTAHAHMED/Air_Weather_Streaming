@@ -210,7 +210,37 @@ tables=(
 )
 
 for table_name in "${tables[@]}"; do
-  docker exec trino trino --server http://localhost:8080 --execute "CALL hive.system.sync_partition_metadata('lakehouse', '${table_name}', 'ADD')"
+  synced="false"
+  for sync_attempt in $(seq 1 8); do
+    if output="$(docker exec trino trino --server http://localhost:8080 --execute "CALL hive.system.sync_partition_metadata('lakehouse', '${table_name}', 'ADD')" 2>&1)"; then
+      echo "$output"
+      echo "partition_sync_ok table=${table_name} attempt=${sync_attempt}"
+      synced="true"
+      break
+    fi
+
+    case "$output" in
+      *"does not exist"*|*"Table not found"*)
+        echo "Partition sync waiting for table metadata table=${table_name} attempt=${sync_attempt}"
+        ;;
+      *"is not partitioned"*)
+        echo "Partition sync skipped (not partitioned) table=${table_name}"
+        synced="true"
+        break
+        ;;
+      *)
+        echo "Partition sync failed table=${table_name} attempt=${sync_attempt}"
+        echo "$output"
+        ;;
+    esac
+
+    sleep 3
+  done
+
+  if [ "$synced" != "true" ]; then
+    echo "Partition sync failed permanently table=${table_name}"
+    exit 1
+  fi
 done
 
 echo "trino_partition_sync_complete"
