@@ -1,0 +1,32 @@
+services:
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino
+    restart: unless-stopped
+    depends_on:
+      namenode:
+        condition: service_healthy
+      datanode:
+        condition: service_healthy
+      hive-metastore:
+        condition: service_healthy
+    ports:
+      - "8090:8080"
+    volumes:
+      - ../trino/etc/config.properties:/etc/trino/config.properties:ro
+      - ../trino/etc/jvm.config:/etc/trino/jvm.config:ro
+      - ../trino/etc/node.properties:/etc/trino/node.properties:ro
+      - ../trino/catalog:/etc/trino/catalog:ro
+      - ../trino/hadoop-conf/core-site.xml:/etc/trino/hadoop-conf/core-site.xml:ro
+      - ../trino/hadoop-conf/hdfs-site.xml:/etc/trino/hadoop-conf/hdfs-site.xml:ro
+    healthcheck:
+      test: ["CMD", "/usr/lib/trino/bin/health-check"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+    networks:
+      - pipeline_net
+
+networks:
+  pipeline_net:
+    name: ${PIPELINE_NETWORK:-pipeline_net}

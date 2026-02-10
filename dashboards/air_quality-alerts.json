@@ -1,0 +1,798 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "panels": [],
+      "title": "Now",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Active DANGER windows in last 10 minutes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*)::double precision AS value\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'",
+          "refId": "A"
+        }
+      ],
+      "title": "Active DANGER (Last 10m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Active WARNING windows in last 10 minutes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(*)::double precision AS value\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'WARNING'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'",
+          "refId": "A"
+        }
+      ],
+      "title": "Active WARNING (Last 10m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Distinct impacted cities with DANGER/WARNING in last 10 minutes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COUNT(DISTINCT city)::double precision AS value\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status IN ('DANGER', 'WARNING')\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'",
+          "refId": "A"
+        }
+      ],
+      "title": "Cities Impacted (Last 10m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Highest DANGER source in the last 10 minutes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "name"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "WITH grouped AS (\n  SELECT\n    CONCAT(city, ' / ', parameter) AS metric,\n    COUNT(*)::double precision AS value\n  FROM air_quality_metrics\n  WHERE $__timeFilter(window_start)\n    AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n    AND window_start <= $__timeTo()::timestamptz\n    AND status = 'DANGER'\n    AND status ~* '${status:regex}'\n    AND city ~* '${city:regex}'\n    AND parameter ~* '${parameter:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n  GROUP BY metric\n  ORDER BY value DESC, metric\n  LIMIT 1\n)\nSELECT $__timeTo()::timestamptz AS \"time\", metric, value\nFROM grouped\nUNION ALL\nSELECT $__timeTo()::timestamptz AS \"time\", 'No active DANGER' AS metric, 0::double precision AS value\nWHERE NOT EXISTS (SELECT 1 FROM grouped)",
+          "refId": "A"
+        }
+      ],
+      "title": "Worst Offender Right Now",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Active DANGER windows in the last 10 minutes",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "DANGER": {
+                        "color": "red",
+                        "text": "DANGER"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 5
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "window_start"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  window_start,\n  window_end,\n  city,\n  parameter,\n  ROUND(rolling_avg::numeric, 2) AS rolling_avg,\n  status,\n  window_duration\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nORDER BY window_start DESC\nLIMIT 100",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Alerts Now (Last 10m)",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Grouped count of active DANGER alerts by city and pollutant",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.9,
+        "groupWidth": 0.8,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONCAT(city, ' / ', parameter) AS city_parameter,\n  COUNT(*)::double precision AS danger_count\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '10 minute')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY city_parameter\nORDER BY danger_count DESC, city_parameter\nLIMIT 10",
+          "refId": "A"
+        }
+      ],
+      "title": "Active DANGER Count by City / Parameter",
+      "type": "barchart"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 101,
+      "panels": [],
+      "title": "Trends",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Trend of WARNING and DANGER event counts by city over time",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 2,
+            "showPoints": "auto",
+            "spanNulls": true
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".* / DANGER"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".* / WARNING"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  COUNT(*)::double precision AS value,\n  CONCAT(city, ' / ', status) AS metric\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND status IN ('WARNING', 'DANGER')\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "WARNING / DANGER Trend by City",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 102,
+      "panels": [],
+      "title": "Top Offenders",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Top city + pollutant combinations by DANGER count over 24h",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.9,
+        "groupWidth": 0.8,
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  CONCAT(city, ' / ', parameter) AS offender,\n  COUNT(*)::double precision AS danger_count\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '24 hour')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY offender\nORDER BY danger_count DESC\nLIMIT 10",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Offenders (Last 24h)",
+      "type": "barchart"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 103,
+      "panels": [],
+      "title": "Recent per City",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Most recent DANGER event per city",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "show": false
+        },
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT DISTINCT ON (city)\n  city,\n  window_start AS last_danger_at,\n  parameter,\n  ROUND(rolling_avg::numeric, 2) AS rolling_avg,\n  window_duration\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '24 hour')\n  AND window_start <= $__timeTo()::timestamptz\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nORDER BY city, window_start DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "Last DANGER Event per City",
+      "type": "table"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [
+    "air-quality",
+    "alerts",
+    "timescaledb"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT city FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "city",
+        "options": [],
+        "query": "SELECT DISTINCT city FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT parameter FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "parameter",
+        "options": [],
+        "query": "SELECT DISTINCT parameter FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT window_duration FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "window_duration",
+        "options": [],
+        "query": "SELECT DISTINCT window_duration FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT status FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "status",
+        "options": [],
+        "query": "SELECT DISTINCT status FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Air Quality - Alerts",
+  "uid": "aq-alerts",
+  "version": 1,
+  "weekStart": ""
+}

@@ -466,16 +466,24 @@ def main() -> None:
             "window_duration",
         )
 
-        if os.path.isdir(state_path) and os.listdir(state_path):
-            prev_state = spark_session.read.parquet(state_path_uri).select(
-                "city",
-                "parameter",
-                "window_duration",
-                "prev_rolling_avg",
-                "prev_window_start",
-            )
-        else:
-            prev_state = spark_session.createDataFrame([], schema=state_schema)
+        prev_state = spark_session.createDataFrame([], schema=state_schema)
+        if os.path.isdir(state_path):
+            state_part_files = [
+                filename
+                for filename in os.listdir(state_path)
+                if filename.startswith("part-") and filename.endswith(".parquet")
+            ]
+            if state_part_files:
+                try:
+                    prev_state = spark_session.read.parquet(state_path_uri).select(
+                        "city",
+                        "parameter",
+                        "window_duration",
+                        "prev_rolling_avg",
+                        "prev_window_start",
+                    )
+                except Exception:
+                    prev_state = spark_session.createDataFrame([], schema=state_schema)
 
         prev_state_for_join = (
             prev_state.withColumnRenamed("prev_rolling_avg", "state_prev_rolling_avg")

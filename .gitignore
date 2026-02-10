@@ -1,0 +1,38 @@
+# Local environment and secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+venv/
+env/
+*.egg-info/
+build/
+dist/
+
+# Runtime and generated data
+lakehouse/
+streaming/checkpoints/
+orchestration/airflow/logs/
+orchestration/airflow/runtime/
+metastore_db/
+derby.log
+*.pid
+*.log
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+NUL

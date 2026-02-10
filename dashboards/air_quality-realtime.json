@@ -1,0 +1,3140 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "panels": [],
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Paris latest overall AQ status with worst pollutant.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status_severity"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "gray",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 2
+                    },
+                    {
+                      "color": "red",
+                      "value": 3
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "NO DATA",
+                        "color": "gray"
+                      },
+                      "1": {
+                        "text": "OK",
+                        "color": "green"
+                      },
+                      "2": {
+                        "text": "WARNING",
+                        "color": "orange"
+                      },
+                      "3": {
+                        "text": "DANGER",
+                        "color": "red"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_value"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_parameter"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_status_text"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "Paris",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 18,
+                "width": 160
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Latest AQ snapshot",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 16,
+                "left": 24,
+                "rotation": 0,
+                "top": 46,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#0F172A"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#334155"
+                },
+                "radius": 999,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Badge",
+              "placement": {
+                "height": 34,
+                "left": 24,
+                "rotation": 0,
+                "top": 74,
+                "width": 168
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 999,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Dot",
+              "placement": {
+                "height": 10,
+                "left": 38,
+                "rotation": 0,
+                "top": 91,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#94A3B8"
+                },
+                "size": 8,
+                "text": {
+                  "fixed": "AQ STATUS",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Label",
+              "placement": {
+                "height": 12,
+                "left": 52,
+                "rotation": 0,
+                "top": 78,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                },
+                "size": 14,
+                "text": {
+                  "field": "worst_status_text",
+                  "fixed": "NO DATA",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Value",
+              "placement": {
+                "height": 16,
+                "left": 54,
+                "rotation": 0,
+                "top": 89,
+                "width": 124
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Worst pollutant",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 122,
+                "width": 120
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 16,
+                "text": {
+                  "field": "worst_parameter",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Pollutant",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 140,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Rolling avg",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 166,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 15,
+                "text": {
+                  "field": "worst_value",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Value",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 184,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 122,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 140,
+                "width": 140
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Updated",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 166,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 10,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 184,
+                "width": 140
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Paris Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH filtered AS (\n  SELECT\n    city,\n    window_start,\n    window_duration,\n    parameter,\n    rolling_avg,\n    status\n  FROM air_quality_metrics\n  WHERE $__timeFilter(window_start)\n    AND city = 'Paris'\n    AND parameter ~* '${parameter:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n    AND status ~* '${status:regex}'\n), latest_ts AS (\n  SELECT MAX(window_start) AS ts\n  FROM filtered\n), ranked AS (\n  SELECT\n    f.city,\n    f.window_start,\n    f.window_duration,\n    f.status AS worst_status_text,\n    f.parameter AS worst_parameter,\n    ROUND(f.rolling_avg::numeric, 2) AS worst_value,\n    CASE f.status\n      WHEN 'DANGER' THEN 3\n      WHEN 'WARNING' THEN 2\n      WHEN 'OK' THEN 1\n      ELSE 0\n    END AS status_severity,\n    ROW_NUMBER() OVER (\n      ORDER BY\n        CASE f.status\n          WHEN 'DANGER' THEN 3\n          WHEN 'WARNING' THEN 2\n          WHEN 'OK' THEN 1\n          ELSE 0\n        END DESC,\n        f.rolling_avg DESC NULLS LAST,\n        f.parameter\n    ) AS rn\n  FROM filtered f\n  JOIN latest_ts lt ON f.window_start = lt.ts\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  worst_status_text,\n  worst_parameter,\n  worst_value,\n  status_severity\nFROM ranked\nWHERE rn = 1\nUNION ALL\nSELECT\n  'Paris' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  'NO DATA' AS worst_status_text,\n  'No data' AS worst_parameter,\n  NULL::numeric AS worst_value,\n  0 AS status_severity\nWHERE NOT EXISTS (SELECT 1 FROM ranked WHERE rn = 1)",
+          "refId": "A"
+        }
+      ],
+      "title": "Paris",
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "London latest overall AQ status with worst pollutant.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status_severity"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "gray",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 2
+                    },
+                    {
+                      "color": "red",
+                      "value": 3
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "NO DATA",
+                        "color": "gray"
+                      },
+                      "1": {
+                        "text": "OK",
+                        "color": "green"
+                      },
+                      "2": {
+                        "text": "WARNING",
+                        "color": "orange"
+                      },
+                      "3": {
+                        "text": "DANGER",
+                        "color": "red"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_value"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_parameter"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_status_text"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "London",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 18,
+                "width": 160
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Latest AQ snapshot",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 16,
+                "left": 24,
+                "rotation": 0,
+                "top": 46,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#0F172A"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#334155"
+                },
+                "radius": 999,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Badge",
+              "placement": {
+                "height": 34,
+                "left": 24,
+                "rotation": 0,
+                "top": 74,
+                "width": 168
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 999,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Dot",
+              "placement": {
+                "height": 10,
+                "left": 38,
+                "rotation": 0,
+                "top": 91,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#94A3B8"
+                },
+                "size": 8,
+                "text": {
+                  "fixed": "AQ STATUS",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Label",
+              "placement": {
+                "height": 12,
+                "left": 52,
+                "rotation": 0,
+                "top": 78,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                },
+                "size": 14,
+                "text": {
+                  "field": "worst_status_text",
+                  "fixed": "NO DATA",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Value",
+              "placement": {
+                "height": 16,
+                "left": 54,
+                "rotation": 0,
+                "top": 89,
+                "width": 124
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Worst pollutant",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 122,
+                "width": 120
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 16,
+                "text": {
+                  "field": "worst_parameter",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Pollutant",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 140,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Rolling avg",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 166,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 15,
+                "text": {
+                  "field": "worst_value",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Value",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 184,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 122,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 140,
+                "width": 140
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Updated",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 166,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 10,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 184,
+                "width": 140
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "London Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH filtered AS (\n  SELECT\n    city,\n    window_start,\n    window_duration,\n    parameter,\n    rolling_avg,\n    status\n  FROM air_quality_metrics\n  WHERE $__timeFilter(window_start)\n    AND city = 'London'\n    AND parameter ~* '${parameter:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n    AND status ~* '${status:regex}'\n), latest_ts AS (\n  SELECT MAX(window_start) AS ts\n  FROM filtered\n), ranked AS (\n  SELECT\n    f.city,\n    f.window_start,\n    f.window_duration,\n    f.status AS worst_status_text,\n    f.parameter AS worst_parameter,\n    ROUND(f.rolling_avg::numeric, 2) AS worst_value,\n    CASE f.status\n      WHEN 'DANGER' THEN 3\n      WHEN 'WARNING' THEN 2\n      WHEN 'OK' THEN 1\n      ELSE 0\n    END AS status_severity,\n    ROW_NUMBER() OVER (\n      ORDER BY\n        CASE f.status\n          WHEN 'DANGER' THEN 3\n          WHEN 'WARNING' THEN 2\n          WHEN 'OK' THEN 1\n          ELSE 0\n        END DESC,\n        f.rolling_avg DESC NULLS LAST,\n        f.parameter\n    ) AS rn\n  FROM filtered f\n  JOIN latest_ts lt ON f.window_start = lt.ts\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  worst_status_text,\n  worst_parameter,\n  worst_value,\n  status_severity\nFROM ranked\nWHERE rn = 1\nUNION ALL\nSELECT\n  'London' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  'NO DATA' AS worst_status_text,\n  'No data' AS worst_parameter,\n  NULL::numeric AS worst_value,\n  0 AS status_severity\nWHERE NOT EXISTS (SELECT 1 FROM ranked WHERE rn = 1)",
+          "refId": "A"
+        }
+      ],
+      "title": "London",
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Berlin latest overall AQ status with worst pollutant.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status_severity"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "gray",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 2
+                    },
+                    {
+                      "color": "red",
+                      "value": 3
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "NO DATA",
+                        "color": "gray"
+                      },
+                      "1": {
+                        "text": "OK",
+                        "color": "green"
+                      },
+                      "2": {
+                        "text": "WARNING",
+                        "color": "orange"
+                      },
+                      "3": {
+                        "text": "DANGER",
+                        "color": "red"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_value"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_parameter"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_status_text"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "NO DATA"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "Berlin",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 18,
+                "width": 160
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Latest AQ snapshot",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 16,
+                "left": 24,
+                "rotation": 0,
+                "top": 46,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#0F172A"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#334155"
+                },
+                "radius": 999,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Badge",
+              "placement": {
+                "height": 34,
+                "left": 24,
+                "rotation": 0,
+                "top": 74,
+                "width": 168
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 999,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Dot",
+              "placement": {
+                "height": 10,
+                "left": 38,
+                "rotation": 0,
+                "top": 91,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#94A3B8"
+                },
+                "size": 8,
+                "text": {
+                  "fixed": "AQ STATUS",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Label",
+              "placement": {
+                "height": 12,
+                "left": 52,
+                "rotation": 0,
+                "top": 78,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "status_severity",
+                  "fixed": "gray"
+                },
+                "size": 14,
+                "text": {
+                  "field": "worst_status_text",
+                  "fixed": "NO DATA",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Value",
+              "placement": {
+                "height": 16,
+                "left": 54,
+                "rotation": 0,
+                "top": 89,
+                "width": 124
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Worst pollutant",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 122,
+                "width": 120
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 16,
+                "text": {
+                  "field": "worst_parameter",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Worst Pollutant",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 140,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Rolling avg",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 166,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 15,
+                "text": {
+                  "field": "worst_value",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Rolling Value",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 184,
+                "width": 150
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 122,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 140,
+                "width": 140
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Updated",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 190,
+                "rotation": 0,
+                "top": 166,
+                "width": 60
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 10,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 16,
+                "left": 190,
+                "rotation": 0,
+                "top": 184,
+                "width": 140
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Berlin Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH filtered AS (\n  SELECT\n    city,\n    window_start,\n    window_duration,\n    parameter,\n    rolling_avg,\n    status\n  FROM air_quality_metrics\n  WHERE $__timeFilter(window_start)\n    AND city = 'Berlin'\n    AND parameter ~* '${parameter:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n    AND status ~* '${status:regex}'\n), latest_ts AS (\n  SELECT MAX(window_start) AS ts\n  FROM filtered\n), ranked AS (\n  SELECT\n    f.city,\n    f.window_start,\n    f.window_duration,\n    f.status AS worst_status_text,\n    f.parameter AS worst_parameter,\n    ROUND(f.rolling_avg::numeric, 2) AS worst_value,\n    CASE f.status\n      WHEN 'DANGER' THEN 3\n      WHEN 'WARNING' THEN 2\n      WHEN 'OK' THEN 1\n      ELSE 0\n    END AS status_severity,\n    ROW_NUMBER() OVER (\n      ORDER BY\n        CASE f.status\n          WHEN 'DANGER' THEN 3\n          WHEN 'WARNING' THEN 2\n          WHEN 'OK' THEN 1\n          ELSE 0\n        END DESC,\n        f.rolling_avg DESC NULLS LAST,\n        f.parameter\n    ) AS rn\n  FROM filtered f\n  JOIN latest_ts lt ON f.window_start = lt.ts\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  worst_status_text,\n  worst_parameter,\n  worst_value,\n  status_severity\nFROM ranked\nWHERE rn = 1\nUNION ALL\nSELECT\n  'Berlin' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  'NO DATA' AS worst_status_text,\n  'No data' AS worst_parameter,\n  NULL::numeric AS worst_value,\n  0 AS status_severity\nWHERE NOT EXISTS (SELECT 1 FROM ranked WHERE rn = 1)",
+          "refId": "A"
+        }
+      ],
+      "title": "Berlin",
+      "type": "canvas"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 105,
+      "panels": [],
+      "title": "Legend",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 16,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 12,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Legend Background",
+              "placement": {
+                "height": 74,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 1110
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Status",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Status Legend Title",
+              "placement": {
+                "height": 16,
+                "left": 24,
+                "rotation": 0,
+                "top": 14,
+                "width": 70
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "green"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "green"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "OK Dot",
+              "placement": {
+                "height": 10,
+                "left": 24,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "OK",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "OK Label",
+              "placement": {
+                "height": 14,
+                "left": 38,
+                "rotation": 0,
+                "top": 34,
+                "width": 50
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "orange"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Warning Dot",
+              "placement": {
+                "height": 10,
+                "left": 88,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "WARNING",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Warning Label",
+              "placement": {
+                "height": 14,
+                "left": 102,
+                "rotation": 0,
+                "top": 34,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "red"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "red"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Danger Dot",
+              "placement": {
+                "height": 10,
+                "left": 194,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "DANGER",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Danger Label",
+              "placement": {
+                "height": 14,
+                "left": 208,
+                "rotation": 0,
+                "top": 34,
+                "width": 80
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "gray"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "gray"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "No Data Dot",
+              "placement": {
+                "height": 10,
+                "left": 290,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "NO DATA",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "No Data Label",
+              "placement": {
+                "height": 14,
+                "left": 304,
+                "rotation": 0,
+                "top": 34,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Pollutant Thresholds",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Title",
+              "placement": {
+                "height": 16,
+                "left": 430,
+                "rotation": 0,
+                "top": 14,
+                "width": 160
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "orange"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Orange Dot",
+              "placement": {
+                "height": 10,
+                "left": 430,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "warning threshold",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Orange Label",
+              "placement": {
+                "height": 14,
+                "left": 444,
+                "rotation": 0,
+                "top": 34,
+                "width": 130
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "red"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "red"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Red Dot",
+              "placement": {
+                "height": 10,
+                "left": 584,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "danger threshold",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Red Label",
+              "placement": {
+                "height": 14,
+                "left": 598,
+                "rotation": 0,
+                "top": 34,
+                "width": 120
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "pm25 >=25/>=50 | pm10 >=50/>=100 | co >=2/>=9 | no2 >=100/>=200 | o3 >=120/>=180",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Threshold Values",
+              "placement": {
+                "height": 14,
+                "left": 430,
+                "rotation": 0,
+                "top": 54,
+                "width": 670
+              },
+              "type": "text"
+            }
+          ],
+          "name": "AQ Legend",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [],
+      "title": "Legend",
+      "type": "canvas"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 101,
+      "panels": [],
+      "title": "Map",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Latest per-city worst AQ status marker with worst pollutant details.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "severity"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "gray",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 2
+                    },
+                    {
+                      "color": "red",
+                      "value": 3
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "0": {
+                        "text": "NO DATA",
+                        "color": "gray"
+                      },
+                      "1": {
+                        "text": "OK",
+                        "color": "green"
+                      },
+                      "2": {
+                        "text": "WARNING",
+                        "color": "orange"
+                      },
+                      "3": {
+                        "text": "DANGER",
+                        "color": "red"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "worst_value"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 17,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "severity",
+                  "fixed": "dark-green",
+                  "mode": "continuous-GrYlRd"
+                },
+                "opacity": 0.95,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "severity",
+                  "fixed": 14,
+                  "max": 24,
+                  "min": 8,
+                  "mode": "byValue"
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": -14,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "filterData": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "location": {
+              "latitude": "latitude",
+              "longitude": "longitude",
+              "mode": "coords"
+            },
+            "name": "AQ Cities",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 50.5,
+          "lon": 4.5,
+          "zoom": 3.8
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH filtered AS (\n  SELECT\n    city,\n    window_start,\n    window_duration,\n    parameter,\n    rolling_avg,\n    status,\n    CASE status\n      WHEN 'DANGER' THEN 3\n      WHEN 'WARNING' THEN 2\n      WHEN 'OK' THEN 1\n      ELSE 0\n    END AS severity\n  FROM air_quality_metrics\n  WHERE $__timeFilter(window_start)\n    AND city ~* '${city:regex}'\n    AND parameter ~* '${parameter:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n    AND status ~* '${status:regex}'\n), latest AS (\n  SELECT city, MAX(window_start) AS window_start\n  FROM filtered\n  GROUP BY city\n), ranked AS (\n  SELECT\n    f.city,\n    f.window_start,\n    f.window_duration,\n    f.status AS worst_status,\n    f.parameter AS worst_parameter,\n    ROUND(f.rolling_avg::numeric, 2) AS worst_value,\n    f.severity,\n    ROW_NUMBER() OVER (\n      PARTITION BY f.city\n      ORDER BY f.severity DESC, f.rolling_avg DESC NULLS LAST, f.parameter\n    ) AS rn\n  FROM filtered f\n  JOIN latest l\n    ON l.city = f.city\n   AND l.window_start = f.window_start\n)\nSELECT\n  r.window_start AS \"time\",\n  r.city,\n  d.latitude,\n  d.longitude,\n  r.worst_status,\n  r.worst_parameter,\n  r.worst_value,\n  r.window_duration,\n  r.window_start,\n  r.severity\nFROM ranked r\nJOIN city_dim d ON d.city = r.city\nWHERE r.rn = 1\nORDER BY r.city",
+          "refId": "A"
+        }
+      ],
+      "title": "City Severity Map",
+      "type": "geomap"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 102,
+      "panels": [],
+      "title": "Trends",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 3,
+            "showPoints": "auto",
+            "spanNulls": true
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pm25"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 25
+                    },
+                    {
+                      "color": "red",
+                      "value": 50
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pm10"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "red",
+                      "value": 100
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "co"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 2
+                    },
+                    {
+                      "color": "red",
+                      "value": 9
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "no2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 100
+                    },
+                    {
+                      "color": "red",
+                      "value": 200
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "o3"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 120
+                    },
+                    {
+                      "color": "red",
+                      "value": 180
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 0,
+        "y": 25
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  AVG(rolling_avg) AS value,\n  parameter AS metric\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\n  AND status ~* '${status:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "All Pollutants - Rolling Average",
+      "type": "timeseries",
+      "description": "Rolling average trend by pollutant with pollutant-specific thresholds."
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "showPoints": "auto",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 25
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  AVG(rolling_avg) AS value,\n  CONCAT(city, ' - ', parameter) AS metric\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\n  AND status ~* '${status:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "City Compare - Pollutants",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 104,
+      "panels": [],
+      "title": "Details",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rolling_avg"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_end"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "OK": {
+                        "text": "OK",
+                        "color": "green"
+                      },
+                      "WARNING": {
+                        "text": "WARNING",
+                        "color": "orange"
+                      },
+                      "DANGER": {
+                        "text": "DANGER",
+                        "color": "red"
+                      },
+                      "NO DATA": {
+                        "text": "NO DATA",
+                        "color": "gray"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "show": false
+        },
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  window_start,\n  window_end,\n  city,\n  parameter,\n  ROUND(rolling_avg::numeric, 2) AS rolling_avg,\n  status,\n  window_duration\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\n  AND status ~* '${status:regex}'\nORDER BY window_start DESC\nLIMIT 50",
+          "refId": "A"
+        }
+      ],
+      "title": "Latest Windows (Last 50)",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ok_events"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "green"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "warning_events"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "orange"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "danger_events"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 44
+      },
+      "id": 14,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.9,
+        "groupWidth": 0.8,
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "normal",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  city,\n  COUNT(*) FILTER (WHERE status = 'OK')::double precision AS ok_events,\n  COUNT(*) FILTER (WHERE status = 'WARNING')::double precision AS warning_events,\n  COUNT(*) FILTER (WHERE status = 'DANGER')::double precision AS danger_events\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\n  AND status ~* '${status:regex}'\nGROUP BY city\nORDER BY city",
+          "refId": "A"
+        }
+      ],
+      "title": "Status Distribution by City",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 3
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 44
+      },
+      "id": 15,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.9,
+        "groupWidth": 0.8,
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "vertical",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  parameter,\n  COUNT(*)::double precision AS danger_events\nFROM air_quality_metrics\nWHERE $__timeFilter(window_start)\n  AND window_start >= ($__timeTo()::timestamptz - INTERVAL '6 hour')\n  AND window_start <= $__timeTo()::timestamptz\n  AND city ~* '${city:regex}'\n  AND parameter ~* '${parameter:regex}'\n  AND window_duration ~* '${window_duration:regex}'\n  AND status = 'DANGER'\n  AND status ~* '${status:regex}'\nGROUP BY parameter\nORDER BY danger_events DESC",
+          "refId": "A"
+        }
+      ],
+      "title": "DANGER Events by Parameter (Fixed last 6h)",
+      "type": "barchart"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [
+    "air-quality",
+    "realtime",
+    "timescaledb"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT city FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "city",
+        "options": [],
+        "query": "SELECT DISTINCT city FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT parameter FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "parameter",
+        "options": [],
+        "query": "SELECT DISTINCT parameter FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT window_duration FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "window_duration",
+        "options": [],
+        "query": "SELECT DISTINCT window_duration FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT status FROM air_quality_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "status",
+        "options": [],
+        "query": "SELECT DISTINCT status FROM air_quality_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Air Quality - Real-time",
+  "uid": "aq-realtime",
+  "version": 1,
+  "weekStart": ""
+}

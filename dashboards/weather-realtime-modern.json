@@ -1,0 +1,3428 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "panels": [],
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Paris weather card: latest temperature with wind, humidity, duration, and update time.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "temperature"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 20
+                    },
+                    {
+                      "color": "red",
+                      "value": 30
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "humidity"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wind"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "mps"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 5
+                    },
+                    {
+                      "color": "red",
+                      "value": 10
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "Paris",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 20,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 13,
+                "text": {
+                  "fixed": "Latest reading",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 48,
+                "width": 180
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "temperature"
+                },
+                "size": 56,
+                "text": {
+                  "field": "temperature",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Temperature",
+              "placement": {
+                "height": 72,
+                "left": 24,
+                "rotation": 0,
+                "top": 70,
+                "width": 220
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Chip",
+              "placement": {
+                "height": 54,
+                "left": 24,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Wind",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "wind"
+                },
+                "size": 14,
+                "text": {
+                  "field": "wind",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Value",
+              "placement": {
+                "height": 22,
+                "left": 24,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Chip",
+              "placement": {
+                "height": 54,
+                "left": 128,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Humidity",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Label",
+              "placement": {
+                "height": 14,
+                "left": 128,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "humidity"
+                },
+                "size": 14,
+                "text": {
+                  "field": "humidity",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Value",
+              "placement": {
+                "height": 22,
+                "left": 128,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#374151"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Chip",
+              "placement": {
+                "height": 54,
+                "left": 232,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 232,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 13,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 22,
+                "left": 232,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Updated:",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 212,
+                "width": 68
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 14,
+                "left": 92,
+                "rotation": 0,
+                "top": 212,
+                "width": 236
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Paris Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT\n    wm.city,\n    wm.window_start,\n    wm.window_duration,\n    ROUND(wm.avg_temperature::numeric, 1) AS temperature,\n    ROUND(wm.avg_humidity::numeric, 1) AS humidity,\n    ROUND(wm.avg_wind_speed::numeric, 2) AS wind\n  FROM weather_metrics wm\n  WHERE $__timeFilter(wm.window_start)\n    AND wm.city = 'Paris'\n    AND wm.window_duration ~* '${window_duration:regex}'\n  ORDER BY wm.window_start DESC\n  LIMIT 1\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  temperature,\n  humidity,\n  wind\nFROM latest\nUNION ALL\nSELECT\n  'Paris' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  NULL::numeric AS temperature,\n  NULL::numeric AS humidity,\n  NULL::numeric AS wind\nWHERE NOT EXISTS (SELECT 1 FROM latest)",
+          "refId": "A"
+        }
+      ],
+      "title": "Paris",
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "London weather card: latest temperature with wind, humidity, duration, and update time.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "temperature"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 20
+                    },
+                    {
+                      "color": "red",
+                      "value": 30
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "humidity"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wind"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "mps"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 5
+                    },
+                    {
+                      "color": "red",
+                      "value": 10
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "London",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 20,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 13,
+                "text": {
+                  "fixed": "Latest reading",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 48,
+                "width": 180
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "temperature"
+                },
+                "size": 56,
+                "text": {
+                  "field": "temperature",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Temperature",
+              "placement": {
+                "height": 72,
+                "left": 24,
+                "rotation": 0,
+                "top": 70,
+                "width": 220
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Chip",
+              "placement": {
+                "height": 54,
+                "left": 24,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Wind",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "wind"
+                },
+                "size": 14,
+                "text": {
+                  "field": "wind",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Value",
+              "placement": {
+                "height": 22,
+                "left": 24,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Chip",
+              "placement": {
+                "height": 54,
+                "left": 128,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Humidity",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Label",
+              "placement": {
+                "height": 14,
+                "left": 128,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "humidity"
+                },
+                "size": 14,
+                "text": {
+                  "field": "humidity",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Value",
+              "placement": {
+                "height": 22,
+                "left": 128,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#374151"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Chip",
+              "placement": {
+                "height": 54,
+                "left": 232,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 232,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 13,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 22,
+                "left": 232,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Updated:",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 212,
+                "width": 68
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 14,
+                "left": 92,
+                "rotation": 0,
+                "top": 212,
+                "width": 236
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "London Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT\n    wm.city,\n    wm.window_start,\n    wm.window_duration,\n    ROUND(wm.avg_temperature::numeric, 1) AS temperature,\n    ROUND(wm.avg_humidity::numeric, 1) AS humidity,\n    ROUND(wm.avg_wind_speed::numeric, 2) AS wind\n  FROM weather_metrics wm\n  WHERE $__timeFilter(wm.window_start)\n    AND wm.city = 'London'\n    AND wm.window_duration ~* '${window_duration:regex}'\n  ORDER BY wm.window_start DESC\n  LIMIT 1\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  temperature,\n  humidity,\n  wind\nFROM latest\nUNION ALL\nSELECT\n  'London' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  NULL::numeric AS temperature,\n  NULL::numeric AS humidity,\n  NULL::numeric AS wind\nWHERE NOT EXISTS (SELECT 1 FROM latest)",
+          "refId": "A"
+        }
+      ],
+      "title": "London",
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Berlin weather card: latest temperature with wind, humidity, duration, and update time.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "temperature"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 20
+                    },
+                    {
+                      "color": "red",
+                      "value": 30
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "humidity"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wind"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "mps"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 5
+                    },
+                    {
+                      "color": "red",
+                      "value": 10
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_duration"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "No data"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 16,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 14,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Card Background",
+              "placement": {
+                "height": 224,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 340
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 24,
+                "text": {
+                  "fixed": "Berlin",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "City",
+              "placement": {
+                "height": 28,
+                "left": 24,
+                "rotation": 0,
+                "top": 20,
+                "width": 170
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 13,
+                "text": {
+                  "fixed": "Latest reading",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Subtitle",
+              "placement": {
+                "height": 18,
+                "left": 24,
+                "rotation": 0,
+                "top": 48,
+                "width": 180
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "field": "temperature"
+                },
+                "size": 56,
+                "text": {
+                  "field": "temperature",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Temperature",
+              "placement": {
+                "height": 72,
+                "left": 24,
+                "rotation": 0,
+                "top": 70,
+                "width": 220
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Chip",
+              "placement": {
+                "height": 54,
+                "left": 24,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Wind",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "wind"
+                },
+                "size": 14,
+                "text": {
+                  "field": "wind",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Value",
+              "placement": {
+                "height": 22,
+                "left": 24,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#1F2937"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Chip",
+              "placement": {
+                "height": 54,
+                "left": 128,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Humidity",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Label",
+              "placement": {
+                "height": 14,
+                "left": 128,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "field": "humidity"
+                },
+                "size": 14,
+                "text": {
+                  "field": "humidity",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Value",
+              "placement": {
+                "height": 22,
+                "left": 128,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#374151"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#111827"
+                },
+                "radius": 12,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Chip",
+              "placement": {
+                "height": 54,
+                "left": 232,
+                "rotation": 0,
+                "top": 150,
+                "width": 96
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "Window",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Label",
+              "placement": {
+                "height": 14,
+                "left": 232,
+                "rotation": 0,
+                "top": 156,
+                "width": 96
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#F9FAFB"
+                },
+                "size": 13,
+                "text": {
+                  "field": "window_duration",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Window Value",
+              "placement": {
+                "height": 22,
+                "left": 232,
+                "rotation": 0,
+                "top": 174,
+                "width": 96
+              },
+              "type": "metric-value"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Updated:",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Label",
+              "placement": {
+                "height": 14,
+                "left": 24,
+                "rotation": 0,
+                "top": 212,
+                "width": 68
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "field": "window_start",
+                  "fixed": "No data",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "name": "Updated Value",
+              "placement": {
+                "height": 14,
+                "left": 92,
+                "rotation": 0,
+                "top": 212,
+                "width": 236
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Berlin Card",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT\n    wm.city,\n    wm.window_start,\n    wm.window_duration,\n    ROUND(wm.avg_temperature::numeric, 1) AS temperature,\n    ROUND(wm.avg_humidity::numeric, 1) AS humidity,\n    ROUND(wm.avg_wind_speed::numeric, 2) AS wind\n  FROM weather_metrics wm\n  WHERE $__timeFilter(wm.window_start)\n    AND wm.city = 'Berlin'\n    AND wm.window_duration ~* '${window_duration:regex}'\n  ORDER BY wm.window_start DESC\n  LIMIT 1\n)\nSELECT\n  city,\n  window_start,\n  window_duration,\n  temperature,\n  humidity,\n  wind\nFROM latest\nUNION ALL\nSELECT\n  'Berlin' AS city,\n  NULL::timestamp AS window_start,\n  'No data' AS window_duration,\n  NULL::numeric AS temperature,\n  NULL::numeric AS humidity,\n  NULL::numeric AS wind\nWHERE NOT EXISTS (SELECT 1 FROM latest)",
+          "refId": "A"
+        }
+      ],
+      "title": "Berlin",
+      "type": "canvas"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 105,
+      "panels": [],
+      "title": "Legend",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 12,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#111827"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#1F2937"
+                },
+                "radius": 12,
+                "width": 1
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "top"
+              },
+              "name": "Legend Background",
+              "placement": {
+                "height": 74,
+                "left": 8,
+                "rotation": 0,
+                "top": 8,
+                "width": 1110
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Temperature",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Title",
+              "placement": {
+                "height": 16,
+                "left": 24,
+                "rotation": 0,
+                "top": 14,
+                "width": 110
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "blue"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "blue"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Blue Dot",
+              "placement": {
+                "height": 10,
+                "left": 24,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "< 0C",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Blue Label",
+              "placement": {
+                "height": 14,
+                "left": 38,
+                "rotation": 0,
+                "top": 34,
+                "width": 70
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "green"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "green"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Green Dot",
+              "placement": {
+                "height": 10,
+                "left": 118,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "0-20C",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Green Label",
+              "placement": {
+                "height": 14,
+                "left": 132,
+                "rotation": 0,
+                "top": 34,
+                "width": 80
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "orange"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Orange Dot",
+              "placement": {
+                "height": 10,
+                "left": 24,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "20-30C",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Orange Label",
+              "placement": {
+                "height": 14,
+                "left": 38,
+                "rotation": 0,
+                "top": 54,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "red"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "red"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Red Dot",
+              "placement": {
+                "height": 10,
+                "left": 118,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "> 30C",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Temp Red Label",
+              "placement": {
+                "height": 14,
+                "left": 132,
+                "rotation": 0,
+                "top": 54,
+                "width": 80
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Humidity",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Humidity Title",
+              "placement": {
+                "height": 16,
+                "left": 390,
+                "rotation": 0,
+                "top": 14,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "green"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "green"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Green Dot",
+              "placement": {
+                "height": 10,
+                "left": 390,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "< 60%",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Green Label",
+              "placement": {
+                "height": 14,
+                "left": 404,
+                "rotation": 0,
+                "top": 34,
+                "width": 80
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "orange"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Orange Dot",
+              "placement": {
+                "height": 10,
+                "left": 390,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "60-80%",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Orange Label",
+              "placement": {
+                "height": 14,
+                "left": 404,
+                "rotation": 0,
+                "top": 54,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "red"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "red"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Red Dot",
+              "placement": {
+                "height": 10,
+                "left": 500,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "> 80%",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Hum Red Label",
+              "placement": {
+                "height": 14,
+                "left": 514,
+                "rotation": 0,
+                "top": 54,
+                "width": 70
+              },
+              "type": "text"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#9CA3AF"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Wind",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Title",
+              "placement": {
+                "height": 16,
+                "left": 720,
+                "rotation": 0,
+                "top": 14,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "green"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "green"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Green Dot",
+              "placement": {
+                "height": 10,
+                "left": 720,
+                "rotation": 0,
+                "top": 36,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "< 5 m/s",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Green Label",
+              "placement": {
+                "height": 14,
+                "left": 734,
+                "rotation": 0,
+                "top": 34,
+                "width": 90
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "orange"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Orange Dot",
+              "placement": {
+                "height": 10,
+                "left": 720,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "5-10 m/s",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Orange Label",
+              "placement": {
+                "height": 14,
+                "left": 734,
+                "rotation": 0,
+                "top": 54,
+                "width": 100
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "red"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "red"
+                },
+                "radius": 2,
+                "width": 0
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 10,
+                "text": {
+                  "fixed": "",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Red Dot",
+              "placement": {
+                "height": 10,
+                "left": 850,
+                "rotation": 0,
+                "top": 56,
+                "width": 10
+              },
+              "type": "rectangle"
+            },
+            {
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#E5E7EB"
+                },
+                "size": 11,
+                "text": {
+                  "fixed": "> 10 m/s",
+                  "mode": "fixed"
+                },
+                "valign": "middle"
+              },
+              "name": "Wind Red Label",
+              "placement": {
+                "height": 14,
+                "left": 864,
+                "rotation": 0,
+                "top": 54,
+                "width": 100
+              },
+              "type": "text"
+            }
+          ],
+          "name": "Legend Canvas",
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "targets": [],
+      "title": "Weather Threshold Legend",
+      "type": "canvas"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 101,
+      "panels": [],
+      "title": "Map",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Latest marker per city, colored by temperature. Tooltip shows temperature, humidity, wind and window duration.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "temperature"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "min",
+                "value": -10
+              },
+              {
+                "id": "max",
+                "value": 40
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "humidity"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wind_speed"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "mps"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 4,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "temperature",
+                  "fixed": "dark-green",
+                  "mode": "continuous-GrYlRd"
+                },
+                "opacity": 0.95,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "temperature",
+                  "fixed": 14,
+                  "max": 24,
+                  "min": 8,
+                  "mode": "byValue"
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": -14,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "filterData": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "location": {
+              "latitude": "latitude",
+              "longitude": "longitude",
+              "mode": "coords"
+            },
+            "name": "Weather Cities",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 50.5,
+          "lon": 4.5,
+          "zoom": 3.8
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT DISTINCT ON (wm.city)\n    wm.city,\n    wm.window_start,\n    wm.avg_temperature,\n    wm.avg_humidity,\n    wm.avg_wind_speed,\n    wm.window_duration\n  FROM weather_metrics wm\n  WHERE $__timeFilter(wm.window_start)\n    AND wm.city ~* '${city:regex}'\n    AND wm.window_duration ~* '${window_duration:regex}'\n  ORDER BY wm.city, wm.window_start DESC\n)\nSELECT\n  l.window_start AS \"time\",\n  l.city,\n  d.latitude,\n  d.longitude,\n  ROUND(l.avg_temperature::numeric, 1) AS temperature,\n  ROUND(l.avg_humidity::numeric, 1) AS humidity,\n  ROUND(l.avg_wind_speed::numeric, 2) AS wind_speed,\n  l.window_duration\nFROM latest l\nJOIN city_dim d ON d.city = l.city\nORDER BY l.city",
+          "refId": "A"
+        }
+      ],
+      "title": "Weather Map",
+      "type": "geomap"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 102,
+      "panels": [],
+      "title": "Trends",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Temperature trend grouped by city",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "showPoints": "auto",
+            "spanNulls": true
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 26
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  AVG(avg_temperature) AS value,\n  city AS metric\nFROM weather_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature by City",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Humidity trend grouped by city",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "showPoints": "auto",
+            "spanNulls": true
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 30
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 26
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  AVG(avg_humidity) AS value,\n  city AS metric\nFROM weather_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "Humidity by City",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Wind speed trend grouped by city",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 8,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "showPoints": "auto",
+            "spanNulls": true
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "mps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 26
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(window_start, $__interval),\n  AVG(avg_wind_speed) AS value,\n  city AS metric\nFROM weather_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nGROUP BY 1, 3\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "title": "Wind by City",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 103,
+      "panels": [],
+      "title": "Per-City Focus",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Single city selected = that city latest value. Multiple cities selected = average of latest city values. Legend: blue < 0C, green 0-20C, orange 20-30C, red > 30C.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "max": 40,
+          "min": -10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 35
+      },
+      "id": 8,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT DISTINCT ON (city)\n    city,\n    avg_temperature\n  FROM weather_metrics\n  WHERE $__timeFilter(window_start)\n    AND city ~* '${city:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n  ORDER BY city, window_start DESC\n)\nSELECT ROUND(AVG(avg_temperature)::numeric, 1) AS value\nFROM latest",
+          "refId": "A"
+        }
+      ],
+      "title": "Selected Cities - Temperature (Latest Avg)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Single city selected = that city latest value. Multiple cities selected = average of latest city values. Legend: green < 60%, orange 60-80%, red > 80%.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 35
+      },
+      "id": 9,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT DISTINCT ON (city)\n    city,\n    avg_humidity\n  FROM weather_metrics\n  WHERE $__timeFilter(window_start)\n    AND city ~* '${city:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n  ORDER BY city, window_start DESC\n)\nSELECT ROUND(AVG(avg_humidity)::numeric, 1) AS value\nFROM latest",
+          "refId": "A"
+        }
+      ],
+      "title": "Selected Cities - Humidity (Latest Avg)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "description": "Single city selected = that city latest value. Multiple cities selected = average of latest city values. Legend: green < 5 m/s, orange 5-10 m/s, red > 10 m/s.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "max": 16,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "mps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 35
+      },
+      "id": 10,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "WITH latest AS (\n  SELECT DISTINCT ON (city)\n    city,\n    avg_wind_speed\n  FROM weather_metrics\n  WHERE $__timeFilter(window_start)\n    AND city ~* '${city:regex}'\n    AND window_duration ~* '${window_duration:regex}'\n  ORDER BY city, window_start DESC\n)\nSELECT ROUND(AVG(avg_wind_speed)::numeric, 2) AS value\nFROM latest",
+          "refId": "A"
+        }
+      ],
+      "title": "Selected Cities - Wind (Latest Avg)",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 104,
+      "panels": [],
+      "title": "Latest",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "timescale"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_temperature"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_humidity"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_wind_speed"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "mps"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "window_end"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 11,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "window_start"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "timescale"
+          },
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  window_start,\n  window_end,\n  city,\n  ROUND(avg_temperature::numeric, 1) AS avg_temperature,\n  ROUND(avg_humidity::numeric, 1) AS avg_humidity,\n  ROUND(avg_wind_speed::numeric, 2) AS avg_wind_speed,\n  window_duration\nFROM weather_metrics\nWHERE $__timeFilter(window_start)\n  AND city ~* '${city:regex}'\n  AND window_duration ~* '${window_duration:regex}'\nORDER BY window_start DESC\nLIMIT 50",
+          "refId": "A"
+        }
+      ],
+      "title": "Latest 50 Weather Windows",
+      "type": "table"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [
+    "weather",
+    "realtime",
+    "modern",
+    "timescaledb"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT city FROM weather_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "city",
+        "options": [],
+        "query": "SELECT DISTINCT city FROM weather_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "postgres",
+          "uid": "timescale"
+        },
+        "definition": "SELECT DISTINCT window_duration FROM weather_metrics ORDER BY 1",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "window_duration",
+        "options": [],
+        "query": "SELECT DISTINCT window_duration FROM weather_metrics ORDER BY 1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Weather - Real-time Modern",
+  "uid": "weather-realtime-modern",
+  "version": 1,
+  "weekStart": ""
+}
