@@ -1,4 +1,3 @@
-![image_alt](https://github.com/ELBATTAHAHMED/Air_Weather_Streaming/blob/99f293fbb9fce078d20bf2106c897251d957d04f/Air_Weather_Streaming.png)
 
 # Air_Weather_Streaming
 
